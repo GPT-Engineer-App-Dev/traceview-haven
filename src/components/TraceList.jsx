@@ -16,17 +16,24 @@ const TraceList = ({ onSelectTrace }) => {
       {mockTraces.map((trace) => (
         <Card 
           key={trace.id} 
-          className="cursor-pointer hover:bg-accent"
+          className="cursor-pointer hover:bg-grey-200 transition-colors duration-200"
           onClick={() => onSelectTrace(trace)}
         >
           <CardContent className="p-4">
             <div className="flex justify-between items-center">
-              <h3 className="font-semibold">{trace.name}</h3>
-              <Badge variant={trace.status === 'success' ? 'default' : trace.status}>
+              <h3 className="font-semibold text-grey-800">{trace.name}</h3>
+              <Badge 
+                variant={trace.status === 'success' ? 'default' : trace.status}
+                className={`${
+                  trace.status === 'success' ? 'bg-green-100 text-green-800' :
+                  trace.status === 'error' ? 'bg-red-100 text-red-800' :
+                  'bg-yellow-100 text-yellow-800'
+                }`}
+              >
                 {trace.status}
               </Badge>
             </div>
-            <p className="text-sm text-muted-foreground mt-2">Duration: {trace.duration}</p>
+            <p className="text-sm text-grey-600 mt-2">Duration: {trace.duration}</p>
           </CardContent>
         </Card>
       ))}
